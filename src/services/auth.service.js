@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //const API_URL = 'http://localhost:8080/api/auth/';
-const API_URL = 'https://tp-final-rija-back.herokuapp.com/api/auth/';
+const API_URL = 'https://back-riri-net.herokuapp.com/api/auth/';
 
 class AuthService {
   login(user) {

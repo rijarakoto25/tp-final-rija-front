@@ -1,57 +1,67 @@
 <template>
   <div class="wrapper fadeInDown">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+
       <form name="form" @submit.prevent="handleRegister">
         <div v-if="!successful">
+          <img
+              id="profile-img"
+              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+              class="profile-img-card"
+          />
+          <!--<div id="app" class="form-group">
+            <input v-on:change="user.picture" type="file" @change="onFileChange"/>
+            <div id="preview">
+              <img id="profile-img" v-if="url" :src="url" />
+            </div>
+          </div>-->
           <div class="form-group">
             <label>Pseudo
-            <input
-              v-model="user.username"
-              v-validate="'required|min:3|max:20'"
-              type="text"
-              class="form-control"
-              name="username"
-            />
+              <input
+                  v-model="user.username"
+                  v-validate="'required|min:3|max:20'"
+                  type="text"
+                  class="form-control"
+                  name="username"
+              />
             </label>
             <div
-              v-if="submitted && errors.has('username')"
-              class="alert-danger"
-            >{{errors.first('username')}}</div>
+                v-if="submitted && errors.has('username')"
+                class="alert-danger"
+            >{{ errors.first('username') }}
+            </div>
           </div>
           <div class="form-group">
             <label>Email
-            <input
-              v-model="user.email"
-              v-validate="'required|email|max:50'"
-              type="email"
-              class="form-control"
-              name="email"
-            />
+              <input
+                  v-model="user.email"
+                  v-validate="'required|email|max:50'"
+                  type="email"
+                  class="form-control"
+                  name="email"
+              />
             </label>
             <div
-              v-if="submitted && errors.has('email')"
-              class="alert-danger"
-            >{{errors.first('email')}}</div>
+                v-if="submitted && errors.has('email')"
+                class="alert-danger"
+            >{{ errors.first('email') }}
+            </div>
           </div>
           <div class="form-group">
             <label>Mot de passe
-            <input
-              v-model="user.password"
-              v-validate="'required|min:6|max:40'"
-              type="password"
-              class="form-control"
-              name="password"
-            />
+              <input
+                  v-model="user.password"
+                  v-validate="'required|min:6|max:40'"
+                  type="password"
+                  class="form-control"
+                  name="password"
+              />
             </label>
             <div
-              v-if="submitted && errors.has('password')"
-              class="alert-danger"
-            >{{errors.first('password')}}</div>
+                v-if="submitted && errors.has('password')"
+                class="alert-danger"
+            >{{ errors.first('password') }}
+            </div>
           </div>
           <div class="form-group">
             <button class="btn btn-primary btn-block">Enregistrer</button>
@@ -60,12 +70,14 @@
       </form>
 
       <div
-        v-if="message"
-        class="alert"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-      >{{message}}</div>
+          v-if="message"
+          class="alert"
+          :class="successful ? 'alert-success' : 'alert-danger'"
+      >{{ message }}
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -75,10 +87,11 @@ export default {
   name: 'Register',
   data() {
     return {
-      user: new User('', '', ''),
+      user: new User(),
       submitted: false,
       successful: false,
-      message: ''
+      message: '',
+      url: null,
     };
   },
   computed: {
@@ -98,21 +111,27 @@ export default {
       this.$validator.validate().then(isValid => {
         if (isValid) {
           this.$store.dispatch('auth/register', this.user).then(
-            data => {
-              this.message = data.message;
-              this.successful = true;
-            },
-            error => {
-              this.message =
-                (error.response && error.response.data && error.response.data.message) ||
-                error.message ||
-                error.toString();
-              this.successful = false;
-            }
+              data => {
+                this.message = data.message;
+                this.successful = true;
+              },
+              error => {
+                this.message =
+                    (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.successful = false;
+              }
           );
         }
       });
-    }
+    },
+    onFileChange(e) {
+      const files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+
+    },
   }
 };
 </script>
@@ -129,7 +148,7 @@ label {
 }
 
 .card {
-  background-color: #f58181;
+  background-color: #49a9c4;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
   margin-top: 50px;
@@ -155,37 +174,56 @@ label {
 
 /* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 @-webkit-keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 
 @keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 500px;
 }
 </style>

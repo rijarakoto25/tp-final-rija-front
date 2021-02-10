@@ -1,7 +1,8 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'https://riri-net.herokuapp.com/api/test/';
+//const API_URL = 'http://localhost:8080/api/test/';
 
 class UserService {
   getPublicContent() {
@@ -19,6 +20,31 @@ class UserService {
   getAdminBoard() {
     return axios.get(API_URL + 'admin', { headers: authHeader() });
   }
+
+  getUsers() {
+    return axios.get(API_URL + 'users', { headers: authHeader() });
+  }
+
+  delete(username) {
+    return axios.delete(API_URL + `user/${username}`, { headers: authHeader() });
+  }
+
+  get(username) {
+    return axios.get(API_URL + `user/${username}`, { headers: authHeader() });
+  }
+
+  update(username, data) {
+    return axios.put(API_URL + `user/${username}`,data , { headers: authHeader() });
+  }
+
+  deleteAll() {
+    return axios.delete(API_URL + 'users', { headers: authHeader() });
+  }
+
+  findByUsername(username) {
+    return axios.get(API_URL + `user/${username}`, { headers: authHeader() });
+  }
+
 }
 
 export default new UserService();

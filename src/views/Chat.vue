@@ -37,11 +37,9 @@
           <div class="card-body">
             <div class="messages" v-for="(msg, index) in messages" :key="index">
               <p><span class="font-weight-bold">{{ msg.user }}: </span>{{ msg.message }}</p>
-              <span class="font-weight-bold text-black-50 offset-10">{{ moment(new Date()).format('h:mm a') }}</span>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -49,14 +47,12 @@
 <script>
 import io from 'socket.io-client';
 
-
 export default {
   data() {
     return {
       user: '',
       message: '',
       messages: [],
-
       socket: io('localhost:8080')
     }
   },
@@ -64,7 +60,6 @@ export default {
   methods: {
     sendMessage(e) {
       e.preventDefault();
-
       this.socket.emit('SEND_MESSAGE', {
         user: this.user,
         message: this.message,
@@ -80,5 +75,4 @@ export default {
     });
   }
 }
-
 </script>

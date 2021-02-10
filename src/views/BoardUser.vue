@@ -2,7 +2,6 @@
   <div class="container">
     <header class="jumbotron bg-info">
       <h3>{{content}}</h3>
-      <div class="font-weight-bold">Aujourd'hui: {{ moment(new Date()).format('DD-MM-YYYY') }}</div>
           <Chat />
     </header>
   </div>

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-   
+    "lint": "vue-cli-service lint",
+    "start": "node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -17,9 +17,11 @@
     "bootstrap": "^4.6.0",
     "core-js": "^2.6.5",
     "emailjs-com": "^2.6.4",
+    "express": "^4.17.1",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
     "popper.js": "^1.16.1",
+    "serve-static": "^1.14.1",
     "socket.io-client": "^3.1.0",
     "v2-table": "^3.0.3",
     "vee-validate": "^2.2.15",

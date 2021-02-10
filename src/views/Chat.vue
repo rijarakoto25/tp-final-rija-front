@@ -53,7 +53,7 @@ export default {
       user: '',
       message: '',
       messages: [],
-      socket: io('localhost:8080')
+      socket: io('back-riri-net.herokuapp.com')
     }
   },
 

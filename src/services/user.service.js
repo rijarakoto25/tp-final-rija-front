@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'https://tp-final-rija-back.herokuapp.com/api/';
+const API_URL = 'https://back-riri-net.herokuapp.com/api/';
 //const API_URL = 'http://localhost:8080/api/';
 
 class UserService {
